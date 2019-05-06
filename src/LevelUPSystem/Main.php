@@ -188,7 +188,7 @@ public function xp3(PlayerJoinEvent $ev){
     }
     
 public function killAdd(PlayerDeathEvent $event) {
-        $this->addDeath($event->getEntity());
+        $this->setDeath($event->getEntity());
         if($event->getEntity()->getLastDamageCause() instanceof EntityDamageByEntityEvent) {
             $killer = $event->getEntity()->getLastDamageCause()->getDamager();
             if($killer instanceof Player) {
