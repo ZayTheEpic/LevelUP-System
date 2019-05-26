@@ -43,28 +43,6 @@ class Main extends PluginBase implements Listener{
         return true;
     }
     
-    public function initializeLevelConfirm($sender){
-$api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createSimpleForm(function (Player $sender, $data){ //Added the new UI lel -ZZ/ZAY
-            $result = $data;
-            if ($result == null) {
-            }
-          switch ($result) {
-            case 0:
-                $sender->sendMessage("§7");
-                break;
-            case 1:
-                $this->runLevel($sender);
-                        break;
-          }
-        });
-        $form->setTitle("§l§bLevel UP");
-$form->setContent("§eYou have §7" . $this->getExp($sender) . " §eexperience \n\n§r§eNeeded §eexperience§e to §blevelup§e: §7" . $this->getExpCount($sender) . "§6");
-        $form->addButton("§cBack", 0);
-        $form->addButton("§l§aYES", 1);
-        $form->sendToPlayer($sender);
-    }
-    
     public function profileInterface($sender){
 $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $form = $api->createSimpleForm(function (Player $sender, $data){ //Added the new UI lel -ZZ/ZAY
@@ -73,16 +51,12 @@ $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
             }
           switch ($result) {
             case 0:
-                $sender->sendMessage("§6");
-                        break;
-            case 1:
-                $this->initializeLevelConfirm($sender);
+                        break;            
             }
         });
         $form->setTitle("§l§bProfile");
-$form->setContent("§aName§e:§7 " . $sender->getName() . " \n§r§7 \n§r§aLevel§e:§6 " . $this->getLevel($sender) . " \n\n§r§7§aExperience§e:§6 " . $this->getExp($sender) . " §e/ §l" . $this->getExpCount($sender) . " \n\n§r§aKills§e:§6 " . $this->getKills($sender) . " \n\n§r§aDeaths§e:§6 " . $this->getDeaths($sender) . "§6");
+$form->setContent("§aName§e:§7 " . $sender->getName() . " \n§r§7 \n§r§aLevel§e:§6 " . $this->getLevel($sender) . " \n\n§r§7§aExperience§e:§6 " . $this->getExp($sender) . "\n\n§r§aKills§e:§6 " . $this->getKills($sender) . " \n\n§r§aDeaths§e:§6 " . $this->getDeaths($sender) . "§6");
         $form->addButton("§l§aGo Back", 0);
-        $form->addButton("§l§bLevelup\n§r§7Click to levelup");
         $form->sendToPlayer($sender);
     }
     
@@ -90,7 +64,6 @@ $form->setContent("§aName§e:§7 " . $sender->getName() . " \n§r§7 \n§r§aLe
         $exp = $this->getExp($player);
         $expn = $this->getExpCount($player);
         if($this->getLevel($player) == 100){
-            $player->sendMessage(C::ITALIC. C::RED. "You have already reached the max level");
 $player->setDisplayName(C::DARK_GRAY. "§b". C::BOLD. C::RED. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
         }
         if($exp >= $expn){
@@ -99,14 +72,10 @@ $player->setDisplayName(C::DARK_GRAY. "§b". C::BOLD. C::RED. "" . $this->getLev
             $this->setNamedTag($player);
             $this->addExpCount($player, 42);
             $player->addTitle("§l§3LEVEL §r§e". $this->getLevel($player). "§e");
-        }else{
-            $player->sendMessage(C::RED. "You don't have enough experience to levelup");
-$player->sendMessage("§cYou currently only have §e" . $this->getExp($player) . " §cexperience");
-        }
     }
     
     public function startLevel($player){
-        $this->profile->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
+        $this->profile->setNested(strtolower($player->getName()).".lvl", $this->profile->getAll()[strtolower($player->getName())]["lvl"] + 1);
         $this->profile->save();
         $this->setNamedTag($player);
     }
@@ -125,19 +94,19 @@ $player->sendMessage("§cYou currently only have §e" . $this->getExp($player) .
     }
     
     public function setDeath($player){
-         $this->profile->setNested(strtolower($player->getName()).".deaths", $this->stats->getAll()[strtolower($player->getName())]["deaths"] + 1);
+         $this->profile->setNested(strtolower($player->getName()).".deaths", $this->profile->getAll()[strtolower($player->getName())]["deaths"] + 1);
          $this->profile->save();
     }
     public function setKill($player){
-         $this->profile->setNested(strtolower($player->getName()).".kills", $this->stats->getAll()[strtolower($player->getName())]["kills"] + 1);
+         $this->profile->setNested(strtolower($player->getName()).".kills", $this->profile->getAll()[strtolower($player->getName())]["kills"] + 1);
          $this->profile->save();
     }
     public function addExp($player, $exp){
-        $this->profile->setNested(strtolower($player).".exp", $this->stats->getAll()[strtolower($player)]["exp"] + $exp);
+        $this->profile->setNested(strtolower($player->getName()).".exp", $this->profile->getAll()[strtolower($player)]["exp"] + $exp);
         $this->profile->save();
     }
     public function addExpCount($player, $exp){
-        $this->profile->setNested(strtolower($player->getName()).".expcount", $this->stats->getAll()[strtolower($player->getName())]["expcount"] + $exp);
+        $this->profile->setNested(strtolower($player->getName()).".expcount", $this->profile->getAll()[strtolower($player->getName())]["expcount"] + $exp);
         $this->profile->save();
     }
 
