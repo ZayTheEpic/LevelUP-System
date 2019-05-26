@@ -73,6 +73,7 @@ $player->setDisplayName(C::DARK_GRAY. "§b". C::BOLD. C::RED. "" . $this->getLev
             $this->addExpCount($player, 42);
             $player->addTitle("§l§3LEVEL §r§e". $this->getLevel($player). "§e");
     }
+  }
     
     public function startLevel($player){
         $this->profile->setNested(strtolower($player->getName()).".lvl", $this->profile->getAll()[strtolower($player->getName())]["lvl"] + 1);
