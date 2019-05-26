@@ -20,12 +20,13 @@ use pocketmine\level\Position;
 use pocketmine\command\ConsoleCommandSender;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use pocketmine\event\player\PlayerMoveEvent;
 
 class Main extends PluginBase implements Listener{
 
     public function onEnable(){
         $this->getLogger()->info("LevelUP has been enabled! For more contact me at zaydepths@gmail.com");
-        $this->stats = new Config($this->getDataFolder() . "mini.yml", Config::YAML, array());
+        $this->profile = new Config($this->getDataFolder() . "profile.yml", Config::YAML, array());
         if(!is_dir($this->getDataFolder())) mkdir($this->getDataFolder());
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
@@ -89,16 +90,15 @@ $form->setContent("§aName§e:§7 " . $sender->getName() . " \n§r§7 \n§r§aLe
         $exp = $this->getExp($player);
         $expn = $this->getExpCount($player);
         if($this->getLevel($player) == 100){
-            $player->sendMessage(C::ITALIC. C::RED. "You have reached the max level");
+            $player->sendMessage(C::ITALIC. C::RED. "You have already reached the max level");
 $player->setDisplayName(C::DARK_GRAY. "§b". C::BOLD. C::RED. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
         }
         if($exp >= $expn){
             $this->startLevel($player);
             $this->reduceExp($player, $expn);
             $this->setNamedTag($player);
-            $this->addExpCount($player, $expn * 1);
-            $player->sendMessage(C::YELLOW . "You leveled up to ". $this->getLevel($player). "!");
-            $player->addTitle(C::GOLD. "§l§b ". $this->getLevel($player). "§a");
+            $this->addExpCount($player, 42);
+            $player->addTitle("§l§3LEVEL §r§e". $this->getLevel($player). "§e");
         }else{
             $player->sendMessage(C::RED. "You don't have enough experience to levelup");
 $player->sendMessage("§cYou currently only have §e" . $this->getExp($player) . " §cexperience");
@@ -106,93 +106,93 @@ $player->sendMessage("§cYou currently only have §e" . $this->getExp($player) .
     }
     
     public function startLevel($player){
-        $this->stats->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
-        $this->stats->save();
+        $this->profile->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
+        $this->profile->save();
         $this->setNamedTag($player);
-        $this->getServer()->broadcastMessage("§a". $player->getName(). " §7has level up to §b". $this->getLevel($player) . "§7 .");
     }
     public function setNamedTag($player){
         $player->setDisplayName(C::DARK_GRAY. "§b". C::BOLD. C::AQUA. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
         $player->save();
     }
-    
-public function reduceExp($player, $exp){
-        $this->stats->setNested(strtolower($player->getName()).".exp", $this->stats->getAll()[strtolower($player->getName())]["exp"] - $exp);
-        $this->stats->save();
-    }
   
-    public function addMembers($player){
-        $this->stats->setNested(strtolower($player->getName()).".lvl", "1");
-        $this->stats->setNested(strtolower($player->getName()).".exp", "0");
-        $this->stats->setNested(strtolower($player->getName()).".expcount", "200");
-        $this->stats->setNested(strtolower($player->getName()).".kills", "0");
-        $this->stats->setNested(strtolower($player->getName()).".deaths", "0");
-        $this->stats->save();
+    public function newProfile($player){
+        $this->profile->setNested(strtolower($player->getName()).".lvl", "1");
+        $this->profile->setNested(strtolower($player->getName()).".exp", "0");
+        $this->profile->setNested(strtolower($player->getName()).".expcount", "100");
+        $this->profile->setNested(strtolower($player->getName()).".kills", "0");
+        $this->profile->setNested(strtolower($player->getName()).".deaths", "0");
+        $this->profile->save();
     }
     
     public function setDeath($player){
-         $this->stats->setNested(strtolower($player->getName()).".deaths", $this->stats->getAll()[strtolower($player->getName())]["deaths"] + 1);
-         $this->stats->save();
+         $this->profile->setNested(strtolower($player->getName()).".deaths", $this->stats->getAll()[strtolower($player->getName())]["deaths"] + 1);
+         $this->profile->save();
     }
     public function setKill($player){
-         $this->stats->setNested(strtolower($player->getName()).".kills", $this->stats->getAll()[strtolower($player->getName())]["kills"] + 1);
-         $this->stats->save();
+         $this->profile->setNested(strtolower($player->getName()).".kills", $this->stats->getAll()[strtolower($player->getName())]["kills"] + 1);
+         $this->profile->save();
     }
     public function addExp($player, $exp){
-        $this->stats->setNested(strtolower($player).".exp", $this->stats->getAll()[strtolower($player)]["exp"] + $exp);
-        $this->stats->save();
+        $this->profile->setNested(strtolower($player).".exp", $this->stats->getAll()[strtolower($player)]["exp"] + $exp);
+        $this->profile->save();
     }
     public function addExpCount($player, $exp){
-        $this->stats->setNested(strtolower($player->getName()).".expcount", $this->stats->getAll()[strtolower($player->getName())]["expcount"] + $exp);
-        $this->stats->save();
+        $this->profile->setNested(strtolower($player->getName()).".expcount", $this->stats->getAll()[strtolower($player->getName())]["expcount"] + $exp);
+        $this->profile->save();
     }
 
     public function getDeaths($player){
-        return $this->stats->getAll()[strtolower($player->getName())]["deaths"];
+        return $this->profile->getAll()[strtolower($player->getName())]["deaths"];
     }
     public function getKills($player){
-        return $this->stats->getAll()[strtolower($player->getName())]["kills"];
+        return $this->profile->getAll()[strtolower($player->getName())]["kills"];
     }
     public function getExp($player){
-        return $this->stats->getAll()[strtolower($player->getName())]["exp"];
+        return $this->profile->getAll()[strtolower($player->getName())]["exp"];
     }
     public function getLevel($player){
-        return $this->stats->getAll()[strtolower($player->getName())]["lvl"];
+        return $this->profile->getAll()[strtolower($player->getName())]["lvl"];
     }
     public function getExpCount($player){
-        return $this->stats->getAll()[strtolower($player->getName())]["expcount"];
+        return $this->profile->getAll()[strtolower($player->getName())]["expcount"];
     }
 
     public function playerJoin(PlayerJoinEvent $e){
         $p = $e->getPlayer();
-        if(!$this->stats->exists(strtolower($p->getName()))){
-            $this->addMembers($p);
+        if(!$this->profile->exists(strtolower($p->getName()))){
+            $this->newProfile($p);
         }
         $this->setNamedTag($p);
     }
-    
-public function xp1(BlockPlaceEvent $ev){
-        $player = $ev->getPlayer()->getName();
-        $this->addExp($player, 5);
-    }
-    
-public function xp2(BlockBreakEvent $ev){
-        $player = $ev->getPlayer()->getName();
-        $this->addExp($player, 5);
-    }
-    
-public function xp3(PlayerJoinEvent $ev){
-        $player = $ev->getPlayer()->getName();
-        $this->addExp($player, 18);    
 
+public function onAuto(PlayerMoveEvent $ev){
+        $player = $ev->getPlayer()->getName();
+        $this->runLevel($player);
+}
+    
+public function onPlace(BlockPlaceEvent $ev){
+        $player = $ev->getPlayer()->getName();
+        $this->addExp($player, 1);
     }
     
-public function killAdd(PlayerDeathEvent $event) {
+public function onBreak(BlockBreakEvent $ev){
+        $player = $ev->getPlayer()->getName();
+        $this->addExp($player, 1);
+    }
+    
+public function onJoining(PlayerJoinEvent $ev){
+        $player = $ev->getPlayer()->getName();
+        $this->addExp($player, 10);    
+    }
+    
+public function onKill(PlayerDeathEvent $event) {
         $this->setDeath($event->getEntity());
         if($event->getEntity()->getLastDamageCause() instanceof EntityDamageByEntityEvent) {
-            $killer = $event->getEntity()->getLastDamageCause()->getDamager();
-            if($killer instanceof Player) {
-                $this->setKill($killer);
+            $slayer = $event->getEntity()->getLastDamageCause()->getDamager();
+            if($slayer instanceof Player) {
+                $this->setKill($slayer);
+                $this->addExp($slayer, 10);
+                $this->runLevel($slayer);
             }
         }
     }
