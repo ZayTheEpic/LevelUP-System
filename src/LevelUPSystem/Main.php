@@ -79,7 +79,7 @@ $form->setContent("§eYou have §7" . $this->getExp($sender) . " §eexperience \
         $form->sendToPlayer($sender);
     }
     
-    public function initLvl($eender){
+    public function initLvl($sender){
     $this->runLevel($sender);
     }
     
