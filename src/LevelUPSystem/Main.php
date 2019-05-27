@@ -150,7 +150,7 @@ $player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . 
         $this->stats->save();
         $this->setNamedTag($player);
     }
-    public function setNameTag($player){
+    public function setTag($player){
         $player->setDisplayName(C::DARK_GRAY. "§eTier §l". $this->getTier($player) . "§r§b" . C::BOLD. C::AQUA. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
         $player->save();
     }
@@ -212,7 +212,7 @@ public function getTier($player){
         if(!$this->stats->exists(strtolower($p->getName()))){
             $this->addMembers($p);
         }
-        $this->setNamedTag($p);
+        $this->setTag($p);
     }
     
     public function lobbyExp($player){
