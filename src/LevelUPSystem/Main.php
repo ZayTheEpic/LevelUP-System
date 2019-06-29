@@ -31,7 +31,7 @@ use pocketmine\event\entity\EntityDamageByEntityEvent;
 class Main extends PluginBase implements Listener {
     
     public function onEnable(){
-        $this->getLogger()->info("Leveling tier has been enabled");
+        $this->getLogger()->info("LevelUP-System has been enabled");
 $this->eco = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
         $this->stats = new Config($this->getDataFolder() . "stats.yml", Config::YAML, array());
         if(!is_dir($this->getDataFolder())) mkdir($this->getDataFolder());
@@ -72,7 +72,7 @@ $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
                         break;
           }
         });
-        $form->setTitle("§l§bLevel UP");
+        $form->setTitle("§l§bLevel UP?");
 $form->setContent("§eYou have §7" . $this->getExp($sender) . " §eexperience \n\n§r§eNeeded §eexperience§e to §blevelup§e: §7" . $this->getExpCount($sender) . "§6");
         $form->addButton("§cBack", 0);
         $form->addButton("§l§aYES", 1);
@@ -81,6 +81,7 @@ $form->setContent("§eYou have §7" . $this->getExp($sender) . " §eexperience \
     
     public function initLvl($sender){
     $this->runLevel($sender);
+
     }
     
     public function profileInterface($sender){
@@ -232,14 +233,16 @@ $player = $ev->getPlayer()->getName();
 public function xp3(PlayerJoinEvent $ev){
         $player = $ev->getPlayer()->getName();
         $this->addExp($player, 0.9); 
-        $this->initLvl($player);
+        $this->initializeConfirm($player);
+    $this->joinMsg($sender);
     }
     
-public function xp4(PlayerMoveEvent $ev){
-        $player = $ev->getPlayer()->getName();
-        $this->addExp($player, 0.1);
-        $this->initLevel($player);
-    }
+    public function joinMsg($sender){
+        $sender->sendMessage("§l§a+ 1 Exp");
+        
+    public function killMsg($sender){
+        $sender->sendMessage("§a§l+10 Exp");
+
     
 public function killAddExp(PlayerDeathEvent $event) {
         $this->setDeath($event->getEntity());
@@ -248,7 +251,7 @@ public function killAddExp(PlayerDeathEvent $event) {
             if($killer instanceof Player) {
                 $this->setKill($killer);
                 $this->addExp($killer, 10.2);
-                $this->runLvl($killer);
+                $this->killMsg($killer);
             }
         }
     }
