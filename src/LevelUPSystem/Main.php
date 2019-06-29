@@ -239,10 +239,11 @@ public function xp3(PlayerJoinEvent $ev){
     
     public function joinMsg($sender){
         $sender->sendMessage("§l§a+ 1 Exp");
-        
+        }
+    
     public function killMsg($sender){
         $sender->sendMessage("§a§l+10 Exp");
-
+}
     
 public function killAddExp(PlayerDeathEvent $event) {
         $this->setDeath($event->getEntity());
