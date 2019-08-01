@@ -149,7 +149,7 @@ $player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . 
     public function startLevel($player){
         $this->stats->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
         $this->stats->save();
-        $this->setNamedTag($player);
+        $this->setTag($player);
     }
     public function setTag($player){
         $player->setDisplayName(C::DARK_GRAY. "§eTier §l". $this->getTier($player) . "§r§b" . C::BOLD. C::AQUA. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
