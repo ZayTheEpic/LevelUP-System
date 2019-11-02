@@ -233,7 +233,7 @@ $player = $ev->getPlayer()->getName();
 public function xp3(PlayerJoinEvent $ev){
         $player = $ev->getPlayer()->getName();
         $this->addExp($player, 0.9); 
-        $this->initializeConfirm($player);
+
     $this->joinMsg($sender);
     }
     
