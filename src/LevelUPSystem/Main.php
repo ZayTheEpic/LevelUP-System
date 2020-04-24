@@ -81,7 +81,7 @@ $form->setContent("§eYou have §7" . $this->getExp($sender) . " §eexperience \
     
    
 
-    }
+    
     
     public function profileInterface($sender){
 $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
