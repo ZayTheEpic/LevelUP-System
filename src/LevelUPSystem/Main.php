@@ -43,10 +43,8 @@ public function onCommand(CommandSender $sender, Command $command, $label, array
             case "profile":
                 $this->profileInterface($sender);
             break;
+       
             
-            case "levelup":
-            $this->initializeLevelConfirm($sender);
-            break;
             
             case "addexp":
             if(isset($args[0]) && isset($args[1]) && is_numeric($args[1])){
@@ -67,20 +65,21 @@ $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
           switch ($result) {
             case 0:
                 break;
+            
             case 1:
                 $this->runLevel($sender);
-                        break;
+                break;
           }
         });
-        $form->setTitle("§l§bLevel UP?");
+        $form->setTitle("§7Confirmation");
 $form->setContent("§eYou have §7" . $this->getExp($sender) . " §eexperience \n\n§r§eNeeded §eexperience§e to §blevelup§e: §7" . $this->getExpCount($sender) . "§6");
-        $form->addButton("§cBack", 0);
-        $form->addButton("§l§aYES", 1);
+        $form->addButton("§4BACK", 0);
+        $form->addButton("§aYes", 1);
+        
         $form->sendToPlayer($sender);
     }
     
-    public function initLvl($sender){
-    $this->runLevel($sender);
+   
 
     }
     
@@ -93,11 +92,16 @@ $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
           switch ($result) {
             case 0:
                         break;
+            case 1:
+                  $this->initializeLevelConfirm($sender);
+                        break;
             }
         });
         $form->setTitle("§l§bProfile");
         $form->setContent("§aName§e:§7 " . $sender->getName() . " \n\n§r§aLevel§e:§6 " . $this->getLevel($sender) . "\n\n§aTier§e:§6 " . $this->getTier($sender) . "\n\n§aCoins§e: §6" . $this->eco->mymoney($sender) . "\n\n§r§aKills§e:§6 " . $this->getKills($sender) . " \n\n§r§aDeaths§e:§6 " . $this->getDeaths($sender) . "§6");
-        $form->addButton("§l§aGo Back", 0);
+        $form->addButton("§cEXIT", 0);
+        $form->addButton("§aLevel Up\n§r§7Click to levelup", 1);
+
         $form->sendToPlayer($sender);
     }
     
@@ -143,6 +147,8 @@ $player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . 
             $this->setNamedTag($player);
             $this->addExpCount($player, 32);
             $player->addTitle(C::GOLD. "§l§b ", "§l§3LEVEL §r§a". $this->getLevel($player). " §a§l", 1, 100, 50);
+        } else {
+            $player->sendMessage("§cYou don't have enough experience to levelup!");
         }
         }
     
@@ -251,7 +257,7 @@ public function killAddExp(PlayerDeathEvent $event) {
             $killer = $event->getEntity()->getLastDamageCause()->getDamager();
             if($killer instanceof Player) {
                 $this->setKill($killer);
-                $this->addExp($killer, 10.2);
+                $this->addExp($killer, 10);
                 $this->killMsg($killer);
             }
         }
