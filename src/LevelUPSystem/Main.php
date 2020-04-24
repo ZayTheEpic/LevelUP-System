@@ -236,17 +236,7 @@ $player = $ev->getPlayer()->getName();
         $this->addExp($player, 0.2);
     }
     
-public function xp3(PlayerJoinEvent $ev){
-        $player = $ev->getPlayer()->getName();
-        $this->addExp($player, 0.9); 
 
-    $this->joinMsg($sender);
-    }
-    
-    public function joinMsg($sender){
-        $sender->sendMessage("§l§a+ 1 Exp");
-        }
-    
     public function killMsg($sender){
         $sender->sendMessage("§a§l+10 Exp");
 }
