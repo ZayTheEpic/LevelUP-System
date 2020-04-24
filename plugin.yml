@@ -9,7 +9,4 @@ commands:
  profile:
   description: Shows your current level and statistics
   default: true
- levelup:
-  description: Levelup with your current available xps
-  default: true
-  aliases: [lvlupgrade, upgradelvl, upgrade, lvlup]
+ 
