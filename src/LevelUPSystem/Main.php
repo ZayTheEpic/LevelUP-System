@@ -144,7 +144,7 @@ $player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . 
         if($exp >= $expn){
             $this->startLevel($player);
             $this->reduceExp($player, $expn);
-            $this->setNamedTag($player);
+            $this->setTag($player);
             $this->addExpCount($player, 32);
             $player->addTitle(C::GOLD. "§l§b ", "§l§3LEVEL §r§a". $this->getLevel($player). " §a§l", 1, 100, 50);
         } else {
@@ -187,7 +187,7 @@ public function reduceExp($player, $exp){
          $this->stats->save();
     }
     public function addExp($player, $exp){
-        $this->stats->setNested(strtolower($player).".exp", $this->stats->getAll()[strtolower($player)]["exp"] + $exp);
+        $this->stats->setNested(strtolower($player->getName()).".exp", $this->stats->getAll()[strtolower($player->getName())]["exp"] + $exp);
         $this->stats->save();
     }
     public function addExpCount($player, $exp){
