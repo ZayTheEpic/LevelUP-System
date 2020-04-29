@@ -227,12 +227,12 @@ public function getTier($player){
     }
     
 public function xp1(BlockPlaceEvent $ev){
-$player = $ev->getPlayer()->getName();
+$player = $ev->getPlayer();
         $this->addExp($player, 0.2);
     }
     
 public function xp2(BlockPlaceEvent $ev){
-$player = $ev->getPlayer()->getName();
+$player = $ev->getPlayer();
         $this->addExp($player, 0.2);
     }
     
