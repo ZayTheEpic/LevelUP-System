@@ -32,8 +32,7 @@ class Main extends PluginBase implements Listener {
     
     public function onEnable(){
         $this->getLogger()->info("LevelUP-System has been enabled");
-$this->eco = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
-        $this->stats = new Config($this->getDataFolder() . "stats.yml", Config::YAML, array());
+$this->stats = new Config($this->getDataFolder() . "stats.yml", Config::YAML, array());
         if(!is_dir($this->getDataFolder())) mkdir($this->getDataFolder());
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
@@ -43,22 +42,15 @@ public function onCommand(CommandSender $sender, Command $command, $label, array
             case "profile":
                 $this->profileInterface($sender);
             break;
-       
-            
-            
-            case "addexp":
-            if(isset($args[0]) && isset($args[1]) && is_numeric($args[1])){
-                $this->addExp($args[0], $args[1]);
-                return true;
-                break;
+   
             }
-            }
+        }
         return true;
     }
     
     public function initializeLevelConfirm($sender){
 $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createSimpleForm(function (Player $sender, $data){ //Added the new UI lel -ZZ/ZAY
+       $form = $api->createSimpleForm(function (Player $sender, $data){ //Added the new UI lel -ZZ/ZAY
             $result = $data;
             if ($result == null) {
             }
@@ -77,15 +69,11 @@ $form->setContent("§eYou have §7" . $this->getExp($sender) . " §eexperience \
         $form->addButton("§aYes", 1);
         
         $form->sendToPlayer($sender);
-    }
-    
-   
-
-    
+    }  
     
     public function profileInterface($sender){
 $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-        $form = $api->createSimpleForm(function (Player $sender, $data){ //Added the new UI lel -ZZ/ZAY
+       $form = $api->createSimpleForm(function (Player $sender, $data){ //Added the new UI lel -ZZ/ZAY
             $result = $data;
             if ($result == null) {
             }
@@ -238,7 +226,7 @@ $player = $ev->getPlayer();
     
 
     public function killMsg($sender){
-        $sender->sendMessage("§a§l+10 Exp");
+        $sender->sendMessage("§e+10 Kill Exp");
 }
     
 public function killAddExp(PlayerDeathEvent $event) {
