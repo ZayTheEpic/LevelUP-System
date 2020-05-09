@@ -42,9 +42,8 @@ public function onCommand(CommandSender $sender, Command $command, $label, array
             case "profile":
                 $this->profileInterface($sender);
             break;
-   
             }
-        }
+        
         return true;
     }
     
