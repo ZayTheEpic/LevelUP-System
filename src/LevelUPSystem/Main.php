@@ -48,7 +48,7 @@ public function onCommand(CommandSender $sender, Command $command, $label, array
     }
     
     public function initializeLevelConfirm($sender){
-$api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
+       $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
        $form = $api->createSimpleForm(function (Player $sender, $data){ //Added the new UI lel -ZZ/ZAY
             $result = $data;
             if ($result == null) {
@@ -63,7 +63,7 @@ $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
           }
         });
         $form->setTitle("§7Confirmation");
-$form->setContent("§eYou have §7" . $this->getExp($sender) . " §eexperience \n\n§r§eNeeded §eexperience§e to §blevelup§e: §7" . $this->getExpCount($sender) . "§6");
+        $form->setContent("§eYou have §7" . $this->getExp($sender) . " §eexperience \n\n§r§eNeeded §eexperience§e to §blevelup§e: §7" . $this->getExpCount($sender) . "§6");
         $form->addButton("§4BACK", 0);
         $form->addButton("§aYes", 1);
         
@@ -71,7 +71,7 @@ $form->setContent("§eYou have §7" . $this->getExp($sender) . " §eexperience \
     }  
     
     public function profileInterface($sender){
-$api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
+       $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
        $form = $api->createSimpleForm(function (Player $sender, $data){ //Added the new UI lel -ZZ/ZAY
             $result = $data;
             if ($result == null) {
@@ -96,37 +96,37 @@ $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
         $exp = $this->getExp($player);
         $expn = $this->getExpCount($player);
         if($this->getLevel($player) == 100){
-$player->setDisplayName(C::DARK_GRAY. "§eTier §l". $this->getTier($player) . " §r§b". C::BOLD. C::GOLD. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
+           $player->setDisplayName(C::DARK_GRAY. "§eTier §l". $this->getTier($player) . " §r§b". C::BOLD. C::GOLD. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
         }
-if($this->getLevel($player) == 5){
-$player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . " §r§b". C::BOLD. C::GOLD. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
-        $this->stats->setNested(strtolower($player->getName()).".tier", $this->stats->getAll()[strtolower($player->getName())]["tier"] + 1);
-        $this->stats->save();
-        $this->stats->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
+        if($this->getLevel($player) == 5){
+           $player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . " §r§b". C::BOLD. C::GOLD. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
+           $this->stats->setNested(strtolower($player->getName()).".tier", $this->stats->getAll()[strtolower($player->getName())]["tier"] + 1);
+           $this->stats->save();
+           $this->stats->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
         }
-if($this->getLevel($player) == 10){
-$player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . " §r§b". C::BOLD. C::GOLD. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
-        $this->stats->setNested(strtolower($player->getName()).".tier", $this->stats->getAll()[strtolower($player->getName())]["tier"] + 1);
-        $this->stats->save();
-        $this->stats->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
+        if($this->getLevel($player) == 10){
+           $player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . " §r§b". C::BOLD. C::GOLD. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
+           $this->stats->setNested(strtolower($player->getName()).".tier", $this->stats->getAll()[strtolower($player->getName())]["tier"] + 1);
+           $this->stats->save();
+           $this->stats->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
         }
-if($this->getLevel($player) == 20){
-$player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . " §r§b". C::BOLD. C::GOLD. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
-        $this->stats->setNested(strtolower($player->getName()).".tier", $this->stats->getAll()[strtolower($player->getName())]["tier"] + 1);
-        $this->stats->save();
-        $this->stats->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
+        if($this->getLevel($player) == 20){
+           $player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . " §r§b". C::BOLD. C::GOLD. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
+           $this->stats->setNested(strtolower($player->getName()).".tier", $this->stats->getAll()[strtolower($player->getName())]["tier"] + 1);
+           $this->stats->save();
+           $this->stats->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
         }
-if($this->getLevel($player) == 30){
-$player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . " §r§b". C::BOLD. C::GOLD. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
-        $this->stats->setNested(strtolower($player->getName()).".tier", $this->stats->getAll()[strtolower($player->getName())]["tier"] + 1);
-        $this->stats->save();
-        $this->stats->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
+        if($this->getLevel($player) == 30){
+           $player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . " §r§b". C::BOLD. C::GOLD. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
+           $this->stats->setNested(strtolower($player->getName()).".tier", $this->stats->getAll()[strtolower($player->getName())]["tier"] + 1);
+           $this->stats->save();
+           $this->stats->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
         }
-if($this->getLevel($player) == 50){
-$player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . " §r§b". C::BOLD. C::GOLD. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
-        $this->stats->setNested(strtolower($player->getName()).".tier", $this->stats->getAll()[strtolower($player->getName())]["tier"] + 1);
-        $this->stats->save();
-        $this->stats->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
+        if($this->getLevel($player) == 50){
+           $player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . " §r§b". C::BOLD. C::GOLD. "" . $this->getLevel($player) . C::AQUA. "§7§r ". C::GREEN. $player->getName());
+           $this->stats->setNested(strtolower($player->getName()).".tier", $this->stats->getAll()[strtolower($player->getName())]["tier"] + 1);
+           $this->stats->save();
+           $this->stats->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
         }
         if($exp >= $expn){
             $this->startLevel($player);
@@ -137,7 +137,7 @@ $player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . 
         } else {
             $player->sendMessage("§cYou don't have enough experience to levelup!");
         }
-        }
+    }
     
     public function startLevel($player){
         $this->stats->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
@@ -149,20 +149,20 @@ $player->setDisplayName(C::DARK_GRAY. "§eTier §l" . $this->getTier($player) . 
         $player->save();
     }
     
-public function reduceExp($player, $exp){
+    public function reduceExp($player, $exp){
         $this->stats->setNested(strtolower($player->getName()).".exp", $this->stats->getAll()[strtolower($player->getName())]["exp"] - $exp);
         $this->stats->save();
     }
   
     public function addMembers($player){
-        $this->stats->setNested(strtolower($player->getName()).".lvl", "1");
-        $this->stats->setNested(strtolower($player->getName()).".tier", "0");
-        
-        $this->stats->setNested(strtolower($player->getName()).".exp", "0");
-        $this->stats->setNested(strtolower($player->getName()).".expcount", "47");
-        $this->stats->setNested(strtolower($player->getName()).".kills", "0");
-        $this->stats->setNested(strtolower($player->getName()).".deaths", "0");
-        $this->stats->save();
+         $this->stats->setNested(strtolower($player->getName()).".lvl", "1");
+         $this->stats->setNested(strtolower($player->getName()).".tier", "0");
+         
+         $this->stats->setNested(strtolower($player->getName()).".exp", "0");
+         $this->stats->setNested(strtolower($player->getName()).".expcount", "47");
+         $this->stats->setNested(strtolower($player->getName()).".kills", "0");
+         $this->stats->setNested(strtolower($player->getName()).".deaths", "0");
+         $this->stats->save();
     }
     
     public function setDeath($player){
@@ -210,27 +210,27 @@ public function getTier($player){
     }
     
     public function lobbyExp($player){
-      $player->sendMessage("§l§eINFO §r§7§l» §r§cYou can't break or place blocks here!");
+         $player->sendMessage("§l§eINFO §r§7§l» §r§cYou can't break or place blocks here!");
     }
     
-public function xp1(BlockPlaceEvent $ev){
-$player = $ev->getPlayer();
-        $this->addExp($player, 0.2);
+    public function xp1(BlockPlaceEvent $ev){
+         $player = $ev->getPlayer();
+         $this->addExp($player, 0.2);
     }
     
-public function xp2(BlockPlaceEvent $ev){
-$player = $ev->getPlayer();
-        $this->addExp($player, 0.2);
+    public function xp2(BlockPlaceEvent $ev){
+         $player = $ev->getPlayer();
+         $this->addExp($player, 0.2);
     }
     
 
     public function killMsg($sender){
-        $sender->sendMessage("§e+10 Kill Exp");
-}
+         $sender->sendMessage("§e+10 Kill Exp");
+     }
     
-public function killAddExp(PlayerDeathEvent $event) {
-        $this->setDeath($event->getEntity());
-        if($event->getEntity()->getLastDamageCause() instanceof EntityDamageByEntityEvent) {
+    public function killAddExp(PlayerDeathEvent $event) {
+         $this->setDeath($event->getEntity());
+         if($event->getEntity()->getLastDamageCause() instanceof EntityDamageByEntityEvent) {
             $killer = $event->getEntity()->getLastDamageCause()->getDamager();
             if($killer instanceof Player) {
                 $this->setKill($killer);
@@ -241,7 +241,7 @@ public function killAddExp(PlayerDeathEvent $event) {
     }
 }
             
- 
+
 
 
 
