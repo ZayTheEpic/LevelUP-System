@@ -25,7 +25,7 @@
 
 # To-Do List
 
-- [ ] Configurable Player Display Name
+- [x] Configurable Player Display Name
 
 - [ ] Improve tiers
 
