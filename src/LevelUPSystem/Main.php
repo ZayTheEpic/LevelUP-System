@@ -32,12 +32,12 @@ class Main extends PluginBase implements Listener {
     
     public function onEnable(){
         $this->getLogger()->info("LevelUP-System has been enabled");
-$this->stats = new Config($this->getDataFolder() . "stats.yml", Config::YAML, array());
+        $this->stats = new Config($this->getDataFolder() . "stats.yml", Config::YAML);
         if(!is_dir($this->getDataFolder())) mkdir($this->getDataFolder());
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
-public function onCommand(CommandSender $sender, Command $command, $label, array $args) : bool {
+    public function onCommand(CommandSender $sender, Command $command, $label, array $args) : bool {
         switch (strtolower($command->getName())) {
             case "profile":
                 $this->profileInterface($sender);
