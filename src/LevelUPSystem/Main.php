@@ -67,7 +67,7 @@ public function onCommand(CommandSender $sender, Command $command, $label, array
         $form->addButton("§4BACK", 0);
         $form->addButton("§aYes", 1);
         
-        $form->sendToPlayer($sender);
+        $sender->sendForm($form);
     }  
     
     public function profileInterface($sender){
@@ -89,7 +89,7 @@ public function onCommand(CommandSender $sender, Command $command, $label, array
         $form->addButton("§cEXIT", 0);
         $form->addButton("§aLevel Up\n§r§7Click to levelup", 1);
 
-        $form->sendToPlayer($sender);
+        $sender->sendForm($form);
     }
     
     public function runLevel($player){
