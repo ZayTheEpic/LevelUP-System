@@ -33,7 +33,9 @@ class Main extends PluginBase implements Listener {
     public function onEnable(){
         $this->getLogger()->info("LevelUP-System has been enabled");
         $this->stats = new Config($this->getDataFolder() . "stats.yml", Config::YAML);
-        if(!is_dir($this->getDataFolder())) mkdir($this->getDataFolder());
+        @mkdir($this->getDataFolder());
+
+        $this->saveResource("stats.yml");
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
