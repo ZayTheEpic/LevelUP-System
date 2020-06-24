@@ -34,6 +34,7 @@ class Main extends PluginBase implements Listener {
         $this->getLogger()->info("LevelUP-System has been enabled");
         $this->stats = new Config($this->getDataFolder() . "stats.yml", Config::YAML);
         @mkdir($this->getDataFolder());
+        $this->eco = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
 
         $this->saveResource("stats.yml");
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
