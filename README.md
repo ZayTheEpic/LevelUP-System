@@ -1,3 +1,6 @@
+## NOTICE
+This project has been cancelled, and will be move to a brand new project which is going to be better & detailed
+
 # LevelUP-System
 - A leveling system designed for pocketmine servers. 
 
